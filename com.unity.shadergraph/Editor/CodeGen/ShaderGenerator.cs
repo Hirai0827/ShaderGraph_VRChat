@@ -606,6 +606,18 @@ namespace UnityEditor.ShaderGraph
                 }
             }
 
+            if (combinedRequirements.requiresVertexID)
+            {
+                var vertexId = "v.VertexID";
+                vertexShader.AppendLine("uint {0} = {1};",ShaderGeneratorNames.VertexID,vertexId);
+                if (graphModelRequirements.requiresVertexID)
+                {
+                    vertexOutputStruct.AppendLine("uint {0}:V_ID;",ShaderGeneratorNames.VertexID);
+                    vertexShaderOutputs.AppendLine("o.{0} = {0};",ShaderGeneratorNames.VertexID);
+                    pixelShader.AppendLine("uint {0} = IN.{0};",ShaderGeneratorNames.VertexID);
+                }
+            }
+
             // -------------------------------------
             // Screen Position
 
@@ -688,6 +700,9 @@ namespace UnityEditor.ShaderGraph
 
             if (pixelRequirements.requiresVertexColor)
                 pixelShaderSurfaceInputs.AppendLine("surfaceInput.{0} = {0};", ShaderGeneratorNames.VertexColor);
+            
+            if(pixelRequirements.requiresVertexID)
+                pixelShaderSurfaceInputs.AppendLine("surfaceInput.{0} = {0};",ShaderGeneratorNames.VertexID);
 
             if (pixelRequirements.requiresScreenPosition)
                 pixelShaderSurfaceInputs.AppendLine("surfaceInput.{0} = {0};", ShaderGeneratorNames.ScreenPosition);
@@ -724,6 +739,8 @@ namespace UnityEditor.ShaderGraph
 
             if (vertexRequirements.requiresVertexColor)
                 vertexShaderDescriptionInputs.AppendLine("vdi.{0} = {0};", ShaderGeneratorNames.VertexColor);
+            if(vertexRequirements.requiresVertexID)
+                vertexShaderDescriptionInputs.AppendLine("vdi.{0} = {0};",ShaderGeneratorNames.VertexID);
 
             if (vertexRequirements.requiresScreenPosition)
                 vertexShaderDescriptionInputs.AppendLine("vdi.{0} = {0};", ShaderGeneratorNames.ScreenPosition);
@@ -881,6 +898,7 @@ namespace UnityEditor.ShaderGraph
             res = res.Replace("${LocalPixelShader}", pixelShader.ToString());
             res = res.Replace("${SurfaceInputs}", pixelShaderSurfaceInputs.ToString());
             res = res.Replace("${SurfaceOutputRemap}", pixelShaderSurfaceRemap.ToString());
+            Debug.Log(res);
             return res;
         }
 

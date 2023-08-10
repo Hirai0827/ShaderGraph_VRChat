@@ -15,6 +15,7 @@ namespace UnityEditor.ShaderGraph.Internal
         [SerializeField] NeededCoordinateSpace m_RequiresPosition;
         [SerializeField] bool m_RequiresScreenPosition;
         [SerializeField] bool m_RequiresVertexColor;
+        [SerializeField] bool m_RequiresVertexID;
         [SerializeField] bool m_RequiresFaceSign;
         [SerializeField] List<UVChannel> m_RequiresMeshUVs;
         [SerializeField] bool m_RequiresDepthTexture;
@@ -75,6 +76,12 @@ namespace UnityEditor.ShaderGraph.Internal
             internal set { m_RequiresVertexColor = value; }
         }
 
+        public bool requiresVertexID
+        {
+            get { return m_RequiresVertexID; }
+            internal set { m_RequiresVertexID = value; }
+        }
+
         public bool requiresFaceSign
         {
             get { return m_RequiresFaceSign; }
@@ -130,6 +137,7 @@ namespace UnityEditor.ShaderGraph.Internal
             newReqs.m_RequiresPosition = other.m_RequiresPosition | m_RequiresPosition;
             newReqs.m_RequiresScreenPosition = other.m_RequiresScreenPosition | m_RequiresScreenPosition;
             newReqs.m_RequiresVertexColor = other.m_RequiresVertexColor | m_RequiresVertexColor;
+            newReqs.m_RequiresVertexID = other.m_RequiresVertexID | m_RequiresVertexID;
             newReqs.m_RequiresFaceSign = other.m_RequiresFaceSign | m_RequiresFaceSign;
             newReqs.m_RequiresDepthTexture = other.m_RequiresDepthTexture | m_RequiresDepthTexture;
             newReqs.m_RequiresCameraOpaqueTexture = other.m_RequiresCameraOpaqueTexture | m_RequiresCameraOpaqueTexture;
@@ -155,6 +163,7 @@ namespace UnityEditor.ShaderGraph.Internal
             NeededCoordinateSpace requiresPosition = nodes.OfType<IMayRequirePosition>().Aggregate(NeededCoordinateSpace.None, (mask, node) => mask | node.RequiresPosition(stageCapability));
             bool requiresScreenPosition = nodes.OfType<IMayRequireScreenPosition>().Any(x => x.RequiresScreenPosition());
             bool requiresVertexColor = nodes.OfType<IMayRequireVertexColor>().Any(x => x.RequiresVertexColor());
+            bool requiresVertexID = nodes.OfType<IMayRequireVertexID>().Any(x => x.RequiresVertexID());
             bool requiresFaceSign = nodes.OfType<IMayRequireFaceSign>().Any(x => x.RequiresFaceSign());
             bool requiresDepthTexture = nodes.OfType<IMayRequireDepthTexture>().Any(x => x.RequiresDepthTexture());
             bool requiresCameraOpaqueTexture = nodes.OfType<IMayRequireCameraOpaqueTexture>().Any(x => x.RequiresCameraOpaqueTexture());
@@ -195,6 +204,7 @@ namespace UnityEditor.ShaderGraph.Internal
                 m_RequiresPosition = requiresPosition,
                 m_RequiresScreenPosition = requiresScreenPosition,
                 m_RequiresVertexColor = requiresVertexColor,
+                m_RequiresVertexID = requiresVertexID,
                 m_RequiresFaceSign = requiresFaceSign,
                 m_RequiresMeshUVs = meshUV,
                 m_RequiresDepthTexture = requiresDepthTexture,

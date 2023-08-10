@@ -435,6 +435,7 @@ namespace UnityEditor.ShaderGraph
         {
             // 'C# qualified assembly type names' for $buildType() commands
             string assemblyQualifiedTypeName = $"{resourceClassName}+{structName}, {assemblyName}";
+            Debug.Log(assemblyQualifiedTypeName);
             return Type.GetType(assemblyQualifiedTypeName);
         }
 
@@ -525,6 +526,11 @@ namespace UnityEditor.ShaderGraph
             if (requirements.requiresVertexColor)
             {
                 activeFields.Add($"{structName}.VertexColor");
+            }
+
+            if (requirements.requiresVertexID)
+            {
+                activeFields.Add($"{structName}.VertexID");
             }
 
             if (requirements.requiresFaceSign)

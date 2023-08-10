@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Data.Util;
+using UnityEngine;
 
 namespace UnityEditor.ShaderGraph
 {
@@ -499,6 +500,7 @@ namespace UnityEditor.ShaderGraph
 
             public ShaderStringBuilder GetShaderCode()
             {
+                Debug.Log(result);
                 return result;
             }
 

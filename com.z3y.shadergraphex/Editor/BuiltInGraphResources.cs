@@ -30,6 +30,7 @@ namespace z3y.ShaderGraphExtended
             [Semantic("TEXCOORD2")] [Optional] Vector4 uv2;
             [Semantic("TEXCOORD3")] [Optional] Vector4 uv3;
             [Semantic("COLOR")] [Optional] Vector4 color;
+            [Semantic("SV_VertexID")] [Optional] uint VertexID;
             [Semantic("BLENDWEIGHTS")] [Optional] Vector4 weights;
             [Semantic("BLENDINDICES")] [Optional] UInt32_4 indices;
             [Semantic("INSTANCEID_SEMANTIC")] [PreprocessorIf("UNITY_ANY_INSTANCING_ENABLED")] uint instanceID;
@@ -47,6 +48,7 @@ namespace z3y.ShaderGraphExtended
             [Optional] [PreprocessorIf("defined(DYNAMICLIGHTMAP_ON) || defined(VARYINGS_NEED_TEXCOORD2)")] Vector4 texCoord2;
             [Optional] Vector4 texCoord3;
             [Optional] [Semantic("COLOR_centroid")] Vector4 color;
+            [Optional] uint VertexID;
             [Optional] Vector3 viewDirectionWS;
             [Optional] Vector4 screenPosition;
             [Semantic("FOG_COORD")] [PreprocessorIf("defined(FOG_ANY)")] float fogCoord;
@@ -93,6 +95,7 @@ namespace z3y.ShaderGraphExtended
             [Optional] Vector4 uv2;
             [Optional] Vector4 uv3;
             [Optional] Vector4 VertexColor;
+            [Optional] uint VertexID;
             [Optional] Vector3 TimeParameters;
             [Optional] Vector4 BoneWeights;
             [Optional] UInt32_4 BoneIndices;
@@ -132,6 +135,7 @@ namespace z3y.ShaderGraphExtended
             [Optional] Vector4 uv2;
             [Optional] Vector4 uv3;
             [Optional] Vector4 VertexColor;
+            [Optional] uint VertexID;
             [Optional] Vector3 TimeParameters;
             [Optional] float FaceSign;
         };
@@ -149,6 +153,7 @@ namespace z3y.ShaderGraphExtended
                 new Dependency("Varyings.texCoord2",                            "Attributes.uv2"),
                 new Dependency("Varyings.texCoord3",                            "Attributes.uv3"),
                 new Dependency("Varyings.color",                                "Attributes.color"),
+                new Dependency("Varyings.VertexID",                                "Attributes.VertexID"),
                 new Dependency("Varyings.instanceID",                           "Attributes.instanceID"),
                 new Dependency("Varyings.stereoTargetEyeIndexAsBlendIdx0",      "Attributes.instanceID"),
                 new Dependency("Varyings.stereoTargetEyeIndexAsRTArrayIdx",     "Attributes.instanceID"),
@@ -188,6 +193,7 @@ namespace z3y.ShaderGraphExtended
                 new Dependency("VertexDescriptionInputs.uv2",                       "Attributes.uv2"),
                 new Dependency("VertexDescriptionInputs.uv3",                       "Attributes.uv3"),
                 new Dependency("VertexDescriptionInputs.VertexColor",               "Attributes.color"),
+                new Dependency("VertexDescriptionInputs.VertexID",               "Attributes.VertexID"),
                 new Dependency("VertexDescriptionInputs.BoneWeights",               "Attributes.weights"),
                 new Dependency("VertexDescriptionInputs.BoneIndices",               "Attributes.indices")
             },
@@ -227,6 +233,7 @@ namespace z3y.ShaderGraphExtended
                 new Dependency("SurfaceDescriptionInputs.uv2",                       "Varyings.texCoord2"),
                 new Dependency("SurfaceDescriptionInputs.uv3",                       "Varyings.texCoord3"),
                 new Dependency("SurfaceDescriptionInputs.VertexColor",               "Varyings.color"),
+                new Dependency("SurfaceDescriptionInputs.VertexID",               "Varyings.VertexID"),
                 new Dependency("SurfaceDescriptionInputs.FaceSign",                  "Varyings.cullFace"),
 
                 new Dependency("DepthOffset", "Varyings.positionWS"),

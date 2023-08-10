@@ -21,6 +21,7 @@ namespace UnityEditor.ShaderGraph
         , IMayRequireViewDirection
         , IMayRequirePosition
         , IMayRequireVertexColor
+        , IMayRequireVertexID
         , IMayRequireTime
         , IMayRequireFaceSign
         , IMayRequireCameraOpaqueTexture
@@ -583,6 +584,13 @@ namespace UnityEditor.ShaderGraph
                 return false;
 
             return asset.requirements.requiresVertexColor;
+        }
+
+        public bool RequiresVertexID(ShaderStageCapability stageCapability)
+        {
+            if (asset == null)
+                return false;
+            return asset.requirements.requiresVertexID;
         }
 
         public bool RequiresCameraOpaqueTexture(ShaderStageCapability stageCapability)

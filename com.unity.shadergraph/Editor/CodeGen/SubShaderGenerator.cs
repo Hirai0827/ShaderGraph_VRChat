@@ -46,6 +46,11 @@ namespace UnityEditor.ShaderGraph
                 {
                     vertexInputs.AppendLine("float4 color : COLOR;");
                 }
+
+                if (graphRequirements.requiresVertexID)
+                {
+                    vertexInputs.AppendLine("uint VertexID : SV_VertexID;");
+                }
                 foreach (var channel in graphRequirements.requiresMeshUVs.Distinct())
                     vertexInputs.AppendLine("float4 texcoord{0} : TEXCOORD{0};", (int)channel);
                 vertexInputs.AppendLine("UNITY_VERTEX_INPUT_INSTANCE_ID");
@@ -305,6 +310,8 @@ namespace UnityEditor.ShaderGraph
 
                 if (requirements.requiresVertexColor)
                     sb.AppendLine("float4 {0};", ShaderGeneratorNames.VertexColor);
+                if(requirements.requiresVertexID)
+                    sb.AppendLine("uint {0};",ShaderGeneratorNames.VertexID);
 
                 if (requirements.requiresScreenPosition)
                     sb.AppendLine("float4 {0};", ShaderGeneratorNames.ScreenPosition);
@@ -334,6 +341,8 @@ namespace UnityEditor.ShaderGraph
 
             if (requirements.requiresVertexColor)
                 sb.AppendLine($"{variableName}.{ShaderGeneratorNames.VertexColor} = IN.{ShaderGeneratorNames.VertexColor};");
+            if (requirements.requiresVertexID)
+                sb.AppendLine($"{variableName}.{ShaderGeneratorNames.VertexID} = IN.{ShaderGeneratorNames.VertexID};");
 
             if (requirements.requiresScreenPosition)
                 sb.AppendLine($"{variableName}.{ShaderGeneratorNames.ScreenPosition} = IN.{ShaderGeneratorNames.ScreenPosition};");

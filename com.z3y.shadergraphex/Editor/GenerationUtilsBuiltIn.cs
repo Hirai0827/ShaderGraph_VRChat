@@ -536,6 +536,11 @@ namespace z3y.ShaderGraphExtended
                 activeFields.Add($"{structName}.VertexColor");
             }
 
+            if (requirements.requiresVertexID)
+            {
+                activeFields.Add($"{structName}.VertexID");
+            }
+
             if (requirements.requiresFaceSign)
             {
                 activeFields.Add($"{structName}.FaceSign");

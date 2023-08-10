@@ -62,6 +62,7 @@ Pass
     $Attributes.uv2:                    #define ATTRIBUTES_NEED_TEXCOORD2
     $Attributes.uv3:                    #define ATTRIBUTES_NEED_TEXCOORD3
     $Attributes.color:                  #define ATTRIBUTES_NEED_COLOR
+    $Attributes.VertexID:               #define ATTRIBUTES_NEED_VERTEXID
     $Varyings.positionWS:               #define VARYINGS_NEED_POSITION_WS 
     $Varyings.normalWS:                 #define VARYINGS_NEED_NORMAL_WS
     $Varyings.tangentWS:                #define VARYINGS_NEED_TANGENT_WS
@@ -70,6 +71,7 @@ Pass
     $Varyings.texCoord2:                #define VARYINGS_NEED_TEXCOORD2
     $Varyings.texCoord3:                #define VARYINGS_NEED_TEXCOORD3
     $Varyings.color:                    #define VARYINGS_NEED_COLOR
+    $Varyings.VertexID:                 #define VARYINGS_NEED_VERTEXID
     $Varyings.viewDirectionWS:          #define VARYINGS_NEED_VIEWDIRECTION_WS
     $Varyings.bitangentWS:              #define VARYINGS_NEED_BITANGENT_WS
     $Varyings.screenPosition:           #define VARYINGS_NEED_SCREENPOSITION
