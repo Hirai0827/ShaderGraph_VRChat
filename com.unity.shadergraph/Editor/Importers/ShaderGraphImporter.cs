@@ -60,6 +60,10 @@ Shader ""Hidden/GraphErrorShader2""
     }
     Fallback Off
 }";
+
+        private string shaderText;
+
+        public string ShaderText => shaderText;
         
         [SuppressMessage("ReSharper", "UnusedMember.Local")]
         static string[] GatherDependenciesFromSourceFile(string assetPath)
@@ -87,6 +91,7 @@ Shader ""Hidden/GraphErrorShader2""
             var sourceAssetDependencyPaths = new List<string>();
 
             UnityEngine.Object mainObject;
+            Debug.Log(path);
 
             var textGraph = File.ReadAllText(path, Encoding.UTF8);
             GraphData graph = JsonUtility.FromJson<GraphData>(textGraph);
@@ -104,6 +109,8 @@ Shader ""Hidden/GraphErrorShader2""
             else
             {
             var text = GetShaderText(path, out configuredTextures, sourceAssetDependencyPaths,graph);
+            Debug.Log(text);
+            this.shaderText = text;
             var shader = ShaderUtil.CreateShaderAsset(text, false);
 
             if (graph != null && graph.messageManager.nodeMessagesChanged)
@@ -189,7 +196,7 @@ Shader ""Hidden/GraphErrorShader2""
             return GetShaderText(path, out configuredTextures, sourceAssetDependencyPaths, graph);
         }
 
-        internal static string GetShaderText(string path, out List<PropertyCollector.TextureInfo> configuredTextures)
+        public static string GetShaderText(string path, out List<PropertyCollector.TextureInfo> configuredTextures)
         {
             var textGraph = File.ReadAllText(path, Encoding.UTF8);
             GraphData graph = JsonUtility.FromJson<GraphData>(textGraph);

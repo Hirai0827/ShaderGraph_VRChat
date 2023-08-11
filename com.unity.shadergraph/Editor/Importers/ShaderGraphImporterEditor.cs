@@ -21,6 +21,30 @@ namespace UnityEditor.ShaderGraph
                 Debug.Assert(importer != null, "importer != null");
                 ShowGraphEditWindow(importer.assetPath);
             }
+            
+            GUILayout.BeginHorizontal();
+            
+            if (GUILayout.Button("Logging Shader"))
+            {
+                var importer = target as ShaderGraphImporter;
+                Debug.Log(importer.assetPath);
+                //Debug.Log(importer.ShaderText);
+                Debug.Log(ShaderGraphImporter.GetShaderText(importer.assetPath, out var _));
+            }
+            
+            
+            if (GUILayout.Button("Export Shader"))
+            {
+                var importer = target as ShaderGraphImporter;
+                Debug.Log(importer.assetPath);
+                //Debug.Log(importer.ShaderText);
+                var shaderText = ShaderGraphImporter.GetShaderText(importer.assetPath, out var _);
+                var path = OpenAndSelectPath("", "shader");
+                System.IO.File.WriteAllBytes(path, System.Text.Encoding.UTF8.GetBytes(shaderText));
+                AssetDatabase.Refresh();
+            }
+
+            GUILayout.EndHorizontal();
 
             ApplyRevertGUI();
         }
@@ -57,6 +81,40 @@ namespace UnityEditor.ShaderGraph
         {
             var path = AssetDatabase.GetAssetPath(instanceID);
             return ShowGraphEditWindow(path);
+        }
+        
+        public string OpenAndSelectPath(string initName,string extName)
+        {
+        
+    
+            // 推奨するディレクトリがあればpathに入れておく
+            var path = "";
+            string ext = extName;
+        
+            if (string.IsNullOrEmpty(path) || System.IO.Path.GetExtension(path) != "." + ext)
+            {
+                // 推奨する保存パスがないときはシーンのディレクトリをとってきたりする（用途次第）
+                if (string.IsNullOrEmpty(path)) {
+                    path = UnityEditor.SceneManagement.EditorSceneManager.GetActiveScene().path;
+                    if (!string.IsNullOrEmpty(path)) {
+                        path = System.IO.Path.GetDirectoryName(path);
+                    }
+                }
+                if (string.IsNullOrEmpty(path)) {
+                    path = "Assets";
+                }
+            }
+
+            // ディレクトリがなければ作る
+            else if (System.IO.Directory.Exists(path) == false) {
+                System.IO.Directory.CreateDirectory(path);
+            }
+
+            // ファイル保存パネルを表示
+            var fileName = initName +"." + ext;
+            fileName = System.IO.Path.GetFileNameWithoutExtension(AssetDatabase.GenerateUniqueAssetPath(System.IO.Path.Combine(path, fileName)));
+            path = EditorUtility.SaveFilePanelInProject("Save Some Asset", fileName, ext, "", path);
+            return path;
         }
     }
 }
