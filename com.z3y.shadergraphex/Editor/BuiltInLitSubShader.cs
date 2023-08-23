@@ -33,6 +33,8 @@ namespace z3y.ShaderGraphExtended
                 PBRMasterNode.PositionSlotId,
                 PBRMasterNode.VertNormalSlotId,
                 PBRMasterNode.VertTangentSlotId,
+                PBRMasterNode.VertColorSlotID,
+                PBRMasterNode.VertAlphaSlotID,
             },
             pixelPorts = new List<int>
             {
@@ -114,6 +116,8 @@ namespace z3y.ShaderGraphExtended
                 PBRMasterNode.PositionSlotId,
                 PBRMasterNode.VertNormalSlotId,
                 PBRMasterNode.VertTangentSlotId,
+                PBRMasterNode.VertColorSlotID,
+                PBRMasterNode.VertAlphaSlotID,
             },
             pixelPorts = new List<int>
             {
@@ -187,6 +191,8 @@ namespace z3y.ShaderGraphExtended
             {
                 PBRMasterNode.PositionSlotId,
                 PBRMasterNode.VertNormalSlotId,
+                PBRMasterNode.VertColorSlotID,
+                PBRMasterNode.VertAlphaSlotID,
             },
             pixelPorts = new List<int>
             {
@@ -229,6 +235,8 @@ namespace z3y.ShaderGraphExtended
             {
                 PBRMasterNode.PositionSlotId,
                 PBRMasterNode.VertNormalSlotId,
+                PBRMasterNode.VertColorSlotID,
+                PBRMasterNode.VertAlphaSlotID,
             },
             pixelPorts = new List<int>
             {
@@ -375,7 +383,9 @@ namespace z3y.ShaderGraphExtended
             // Graph Vertex
             if(masterNode.IsSlotConnected(PBRMasterNode.PositionSlotId) || 
                masterNode.IsSlotConnected(PBRMasterNode.VertNormalSlotId) || 
-               masterNode.IsSlotConnected(PBRMasterNode.VertTangentSlotId))
+               masterNode.IsSlotConnected(PBRMasterNode.VertTangentSlotId)|| 
+               masterNode.IsSlotConnected(PBRMasterNode.VertColorSlotID)|| 
+               masterNode.IsSlotConnected(PBRMasterNode.VertAlphaSlotID))
             {
                 baseActiveFields.Add("features.graphVertex");
             }

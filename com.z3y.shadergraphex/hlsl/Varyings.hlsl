@@ -100,7 +100,7 @@ Varyings BuildVaryings(Attributes input)
 #endif
 
 #if defined(VARYINGS_NEED_COLOR) || defined(VARYINGS_DS_NEED_COLOR)
-    output.color = input.color;
+    output.color = float4(vertexDescription.VertexColor,vertexDescription.VertexAlpha);
 #endif
 #if defined(VARYINGS_NEED_VERTEXID) || defined(VARYINGS_DS_SV_VertexID)
     output.VertexID = input.VertexID;

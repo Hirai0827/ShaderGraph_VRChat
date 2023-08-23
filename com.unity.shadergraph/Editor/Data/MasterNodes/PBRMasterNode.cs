@@ -26,6 +26,8 @@ namespace UnityEditor.ShaderGraph
         public const string PositionName = "Vertex Position";
         public const string NormalName = "Vertex Normal";
         public const string TangentName = "Vertex Tangent";
+        public const string ColorName = "Vertex Color";
+        public const string AlphaName = "Vertex Alpha";
 
 
         public const int AlbedoSlotId = 0;
@@ -53,6 +55,9 @@ namespace UnityEditor.ShaderGraph
         public const int AnisotropyTangentSlotID = 15;
         public const string AnisotropyLevelName = "Anisotropy";
         public const int AnisotropyLevelSlotID = 16;
+        
+        public const int VertColorSlotID = 17;
+        public const int VertAlphaSlotID = 18;
 
 
 
@@ -193,10 +198,12 @@ namespace UnityEditor.ShaderGraph
         public sealed override void UpdateNodeAfterDeserialization()
         {
             base.UpdateNodeAfterDeserialization();
-            name = "PBR Master";
+            name = "PBR Master ABC";
             AddSlot(new PositionMaterialSlot(PositionSlotId, PositionName, PositionName, CoordinateSpace.Object, ShaderStageCapability.Vertex));
             AddSlot(new NormalMaterialSlot(VertNormalSlotId, NormalName, NormalName, CoordinateSpace.Object, ShaderStageCapability.Vertex));
             AddSlot(new TangentMaterialSlot(VertTangentSlotId, TangentName, TangentName, CoordinateSpace.Object, ShaderStageCapability.Vertex));
+            AddSlot(new ColorRGBMaterialSlot(VertColorSlotID, ColorName, ColorName, SlotType.Input, Color.grey.gamma, ColorMode.Default,  ShaderStageCapability.Vertex));
+            AddSlot(new Vector1MaterialSlot(VertAlphaSlotID, AlphaName, AlphaName, SlotType.Input,1.0f,  ShaderStageCapability.Vertex));
             AddSlot(new ColorRGBMaterialSlot(AlbedoSlotId, AlbedoSlotName, AlbedoSlotName, SlotType.Input, Color.grey.gamma, ColorMode.Default, ShaderStageCapability.Fragment));
             //switch drop off delivery space for normal values
             var coordSpace = CoordinateSpace.Tangent;
@@ -242,6 +249,8 @@ namespace UnityEditor.ShaderGraph
                 PositionSlotId,
                 VertNormalSlotId,
                 VertTangentSlotId,
+                VertColorSlotID,
+                VertAlphaSlotID,
                 AlbedoSlotId,
                 NormalSlotId,
                 EmissionSlotId,

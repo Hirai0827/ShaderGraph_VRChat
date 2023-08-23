@@ -23,6 +23,7 @@ namespace UnityEditor.ShaderGraph
         const string kOutputSlotH2Name = "1/Height";
 
         public override bool hasPreview { get { return false; } }
+        
 
         public Texture2DPropertiesNode()
         {
@@ -33,11 +34,11 @@ namespace UnityEditor.ShaderGraph
 
         public sealed override void UpdateNodeAfterDeserialization()
         {
-            AddSlot(new Vector1MaterialSlot(OutputSlotWId, kOutputSlotWName, kOutputSlotWName, SlotType.Output, 0, ShaderStageCapability.Fragment));
-            AddSlot(new Vector1MaterialSlot(OutputSlotHId, kOutputSlotHName, kOutputSlotHName, SlotType.Output, 0, ShaderStageCapability.Fragment));
+            AddSlot(new Vector1MaterialSlot(OutputSlotWId, kOutputSlotWName, kOutputSlotWName, SlotType.Output, 0, ShaderStageCapability.All));
+            AddSlot(new Vector1MaterialSlot(OutputSlotHId, kOutputSlotHName, kOutputSlotHName, SlotType.Output, 0, ShaderStageCapability.All));
             
-            AddSlot(new Vector1MaterialSlot(OutputSlotW2Id, kOutputSlotW2Name, kOutputSlotW2Name, SlotType.Output, 0, ShaderStageCapability.Fragment));
-            AddSlot(new Vector1MaterialSlot(OutputSlotH2Id, kOutputSlotH2Name, kOutputSlotH2Name, SlotType.Output, 0, ShaderStageCapability.Fragment));
+            AddSlot(new Vector1MaterialSlot(OutputSlotW2Id, kOutputSlotW2Name, kOutputSlotW2Name, SlotType.Output, 0, ShaderStageCapability.All));
+            AddSlot(new Vector1MaterialSlot(OutputSlotH2Id, kOutputSlotH2Name, kOutputSlotH2Name, SlotType.Output, 0, ShaderStageCapability.All));
             
             AddSlot(new Texture2DInputMaterialSlot(TextureInputId, kTextureInputName, kTextureInputName));
             RemoveSlotsNameNotMatching(new[] { OutputSlotWId, OutputSlotHId, TextureInputId, OutputSlotW2Id, OutputSlotH2Id});

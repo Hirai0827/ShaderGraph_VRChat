@@ -49,6 +49,7 @@ namespace z3y.ShaderGraphExtended
             [Optional] Vector4 texCoord3;
             [Optional] [Semantic("COLOR_centroid")] Vector4 color;
             [Optional] uint VertexID;
+            [Optional] Vector4 VertexColor;
             [Optional] Vector3 viewDirectionWS;
             [Optional] Vector4 screenPosition;
             [Semantic("FOG_COORD")] [PreprocessorIf("defined(FOG_ANY)")] float fogCoord;
