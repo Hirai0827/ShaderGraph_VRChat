@@ -20,6 +20,8 @@ namespace UnityEditor.ShaderGraph
         public const string PositionName = "Vertex Position";
         public const string NormalName = "Vertex Normal";
         public const string TangentName = "Vertex Tangent";
+        public const string ColorName = "Vertex Color";
+        public const string AlphaName = "Vertex Alpha";
 
         public const int ColorSlotId = 0;
         public const int AlphaSlotId = 7;
@@ -27,6 +29,8 @@ namespace UnityEditor.ShaderGraph
         public const int PositionSlotId = 9;
         public const int VertNormalSlotId = 10;
         public const int VertTangentSlotId = 11;
+        public const int VertColorSlotId = 12;
+        public const int VertAlphaSlotId = 13;
 
         [SerializeField]
         SurfaceType m_SurfaceType;
@@ -106,6 +110,9 @@ namespace UnityEditor.ShaderGraph
             AddSlot(new PositionMaterialSlot(PositionSlotId, PositionName, PositionName, CoordinateSpace.Object, ShaderStageCapability.Vertex));
             AddSlot(new NormalMaterialSlot(VertNormalSlotId, NormalName, NormalName, CoordinateSpace.Object, ShaderStageCapability.Vertex));
             AddSlot(new TangentMaterialSlot(VertTangentSlotId, TangentName, TangentName, CoordinateSpace.Object, ShaderStageCapability.Vertex));
+            AddSlot(new ColorRGBMaterialSlot(VertColorSlotId, ColorName, ColorName, SlotType.Input,Color.grey.gamma, ColorMode.Default, ShaderStageCapability.Vertex));
+            AddSlot(new Vector1MaterialSlot(VertAlphaSlotId, AlphaName, AlphaName, SlotType.Input, 1, ShaderStageCapability.Vertex));
+
             AddSlot(new ColorRGBMaterialSlot(ColorSlotId, ColorSlotName, ColorSlotName, SlotType.Input, Color.grey.gamma, ColorMode.Default, ShaderStageCapability.Fragment));
             AddSlot(new Vector1MaterialSlot(AlphaSlotId, AlphaSlotName, AlphaSlotName, SlotType.Input, 1, ShaderStageCapability.Fragment));
             AddSlot(new Vector1MaterialSlot(AlphaThresholdSlotId, AlphaClipThresholdSlotName, AlphaClipThresholdSlotName, SlotType.Input, 0.0f, ShaderStageCapability.Fragment));
@@ -118,6 +125,8 @@ namespace UnityEditor.ShaderGraph
                 PositionSlotId,
                 VertNormalSlotId,
                 VertTangentSlotId,
+                VertColorSlotId,
+                VertAlphaSlotId,
                 ColorSlotId,
                 AlphaSlotId,
                 AlphaThresholdSlotId

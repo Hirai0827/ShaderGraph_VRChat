@@ -30,7 +30,9 @@ namespace z3y.ShaderGraphExtended
             {
                 UnlitMasterNode.PositionSlotId,
                 UnlitMasterNode.VertNormalSlotId,
-                UnlitMasterNode.VertTangentSlotId
+                UnlitMasterNode.VertTangentSlotId,
+                UnlitMasterNode.VertColorSlotId,
+                UnlitMasterNode.VertAlphaSlotId,
             },
             pixelPorts = new List<int>
             {
@@ -72,6 +74,8 @@ namespace z3y.ShaderGraphExtended
             {
                 UnlitMasterNode.PositionSlotId,
                 UnlitMasterNode.VertNormalSlotId,
+                UnlitMasterNode.VertColorSlotId,
+                UnlitMasterNode.VertAlphaSlotId,
             },
             pixelPorts = new List<int>
             {
@@ -132,7 +136,9 @@ namespace z3y.ShaderGraphExtended
             // Graph Vertex
             if(masterNode.IsSlotConnected(UnlitMasterNode.PositionSlotId) || 
                masterNode.IsSlotConnected(UnlitMasterNode.VertNormalSlotId) || 
-               masterNode.IsSlotConnected(UnlitMasterNode.VertTangentSlotId))
+               masterNode.IsSlotConnected(UnlitMasterNode.VertTangentSlotId)||
+               masterNode.IsSlotConnected(UnlitMasterNode.VertColorSlotId) ||
+               masterNode.IsSlotConnected(UnlitMasterNode.VertAlphaSlotId))
             {
                 baseActiveFields.Add("features.graphVertex");
             }
